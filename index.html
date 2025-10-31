@@ -1,186 +1,273 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-</head>
-
-<body>
-  
-</body>
-
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ID Card</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSP. View Driving Licence Learner Info</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
+      font-family: "Noto Sans Bengali", Arial, sans-serif;
+      background-color: #fff;
+      color: #000;
       margin: 0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
+      padding: 0;
     }
-    .card {
-      width: 320px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
       padding: 20px;
+    }
+
+    header {
       text-align: center;
       position: relative;
-      margin: 0 auto;
-      display: table;
-    }
-    .logos {
-      display: flex;
-      justify-content: space-between;
       margin-bottom: 10px;
     }
-    .logos img {
-      width: 80px;
-      height: auto;
+
+    #logo-left {
+      position: absolute;
+      left: 20px;
+      top: 0;
+      height: 70px;
     }
-    .photo {
-      width: 120px;
-      height: 140px;
+
+    #logo-center {
+      height: 85px;
+    }
+
+    .lang-switch {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .lang-switch button {
+      border: none;
+      background: none;
+      font-weight: bold;
+      cursor: pointer;
+      color: #007bff;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .lang-switch img {
+      width: 22px;
+      height: 15px;
+      object-fit: cover;
       border: 1px solid #ccc;
-      margin: 0 auto 10px;
-      background-size: cover;
-      background-position: center;
     }
+
+    h3 {
+      margin-bottom: 10px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
     h2 {
-      margin: 10px 0 5px;
-      font-size: 18px;
+      color: green;
+      text-align: center;
+      margin-bottom: 5px;
     }
-    .info {
-      text-align: left;
-      margin-top: 10px;
-    }
-    .info p {
-      margin: 4px 0;
-      font-size: 14px;
-    }
-    .info span.label {
-      font-weight: normal;
-      color: #333;
-    }
-    .info span.value {
+
+    p {
+      text-align: center;
+      margin-bottom: 20px;
+      color: green;
       font-weight: bold;
     }
-    .signatures {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 25px;
-      align-items: center;
-      position: relative;
+
+    .profile {
+      text-align: center;
+      margin: 20px 0;
     }
-    .signatures img {
-      height: 35px;
+
+    .profile img {
+      width: 120px;
+      height: auto;
+      border: 1px solid #ccc;
     }
-    .signatures p {
-      font-size: 12px;
-      margin-top: 5px;
+
+    .info-section {
+      text-align: left;
+      margin-left: 20px;
     }
-    .seal {
-      position: absolute;
-      right: 20px;
-      top: 5px;
-      height: 50px;
-      opacity: 0.8;
+
+    .info-section h4 {
+      margin-bottom: 12px;
+      padding-bottom: 0;
+      border-bottom: none;
     }
-    .signature-line {
-      height: 2px;
-      background: #003366;
-      width: 80%;
-      margin: 15px auto 0 auto;
+
+    .info-section table {
+      border-collapse: separate;
+      border-spacing: 0 10px; /* সারিগুলোর মাঝে গ্যাপ বাড়ানো হয়েছে */
+      width: 100%;
+      table-layout: fixed;
+      margin-bottom: 25px;
     }
+
+    .info-section td {
+      padding: 8px;
+      vertical-align: top;
+    }
+
+    .info-section td:first-child {
+      width: 45%;
+      font-weight: normal; /* বাম পাশের লেখা চিকন */
+    }
+
+    .info-section td:last-child {
+      width: 55%;
+      font-weight: bold; /* ডান পাশের লেখা মোটা */
+    }
+
     .footer {
-      margin-top: 10px;
-      background: #003366;
-      color: white;
-      padding: 6px;
-      font-size: 14px;
-      border-radius: 0 0 10px 10px;
+      border-top: 2px solid #000;
+      margin-top: 30px;
+      padding-top: 10px;
+      font-size: 13px;
+      color: #555;
+      text-align: center;
     }
-    #downloadBtn {
-      margin-top: 25px;
-      background: #003366;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 14px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    @media print {
-      #downloadBtn {
-        display: none;
-      }
+
+    a {
+      text-decoration: none;
+      color: #007bff;
     }
   </style>
 </head>
+
 <body>
-  <div>
-    <div class="card" id="idCard">
-      <div class="logos">
-        <img src="logo-left.png" alt="Left Logo">
-        <img src="logo-right.png" alt="Right Logo">
-      </div>
-      <div class="photo" style="background-image: url('photo.jpg');"></div>
-      <h2>Emp Code: <strong>257370</strong></h2>
-      <h2>MD Romjan Mia</h2>
-      <div class="info">
-        <p><span class="label">Job Title:</span> <span class="value">WELDER</span></p>
-        <p><span class="label">Blood Group:</span> <span class="value">B+</span></p>
-        <p><span class="label">Phone:</span> <span class="value">+880 1767679277</span></p>
-        <p><span class="label">Address:</span><br>
-          <span class="value">Jatrapur, Ashuganj, Ashuganj-3402<br>
-          Brahmanbaria, Chattogram</span></p>
-      </div>
-      <div class="signatures">
-        <div>
-          <img src="sign-left.png" alt="Signature Left">
-          <p>Signature of Holder</p>
-        </div>
-        <div style="position: relative;">
-          <img src="sign-right.png" alt="Signature Right">
-          <img class="seal" src="seal.png" alt="Seal">
-          <p>Managing Director</p>
-        </div>
-      </div>
-      <div class="signature-line"></div>
-      <div class="footer">AFCONS INFRASTRUCTURE LIMITED</div>
+  <div class="container">
+    <header>
+      <img id="logo-left" src="logo-left.png" alt="Left Logo">
+      <img id="logo-center" src="logo-center.png" alt="Center Logo">
+    </header>
+
+    <!-- ভাষা বাটন -->
+    <div class="lang-switch">
+      <button id="langBtn" onclick="toggleLanguage()">
+        <img id="flag" src="us-flag.png" alt="Flag"> <span id="langText">English</span>
+      </button>
     </div>
-    <div style="text-align: center;">
-      <button id="downloadBtn" onclick="downloadPDF()">Download PDF</button>
+
+    <!-- বাংলা -->
+    <div id="bn" class="lang" style="display:none;">
+      <h3>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার<br>সড়ক পরিবহন ও মহাসড়ক বিভাগ<br>বাংলাদেশ সড়ক পরিবহন কর্তৃপক্ষ (বিআরটিএ)</h3>
+      <h2>যাচাইকরণ সফল</h2>
+      <p>এই শিক্ষানবিস লাইসেন্সটি বৈধ</p>
+
+      <div class="profile">
+        <img src="photo.jpg" alt="Applicant Photo">
+      </div>
+
+      <div class="info-section">
+        <h4>আবেদনকারীর তথ্য</h4>
+        <table>
+          <tr><td>আবেদনকারীর নাম(ইংরেজি):</td><td>AJHARUL ISLAM</td></tr>
+          <tr><td>আবেদনকারীর নাম(বাংলা):</td><td>আজহারুল ইসলাম</td></tr>
+          <tr><td>পিতা / স্বামীর নাম(ইংরেজি):</td><td>BADUL MIAH</td></tr>
+          <tr><td>পিতা / স্বামীর নাম (বাংলা):</td><td>বাদল মিয়া</td></tr>
+          <tr><td>মাতার নাম(ইংরেজি):</td><td>ROKEYA BEGUM</td></tr>
+          <tr><td>মাতার নাম(বাংলা):</td><td>রোকেয়া বেগম</td></tr>
+          <tr><td>জন্ম তারিখ:</td><td>15/01/1997</td></tr>
+          <tr><td>রক্তের গ্রুপ:</td><td>O(+VE)</td></tr>
+          <tr><td>বর্তমান ঠিকানা:</td><td>JATRAPUR, JATRAPUR, Ashuganj, B.BARIA, CHITTAGONG</td></tr>
+          <tr><td>জাতীয় পরিচয়পত্র নং:</td><td>24******03</td></tr>
+        </table>
+
+        <h4>লার্নার বা শিক্ষানবিস লাইসেন্সের তথ্য</h4>
+        <table>
+          <tr><td>লার্নার নং:</td><td>23-17976045</td></tr>
+          <tr><td>লাইসেন্স নং:</td><td>DK0897294CL0003</td></tr>
+          <tr><td>লাইসেন্সের ধরন:</td><td>PROFESSIONAL</td></tr>
+          <tr><td>যানবাহনের শ্রেণী:</td><td>LIGHT</td></tr>
+          <tr><td>পরীক্ষার স্থান:</td><td>DHAKA METRO BRTA</td></tr>
+          <tr><td>পরীক্ষার তারিখ:</td><td>20/05/2023</td></tr>
+          <tr><td>লাইসেন্সিং কর্তৃপক্ষ:</td><td>DHAKA METRO</td></tr>
+          <tr><td>রোল নম্বর:</td><td>197</td></tr>
+          <tr><td>ইস্যুর তারিখ:</td><td>15/03/2023</td></tr>
+          <tr><td>মেয়াদোত্তীর্ণের তারিখ:</td><td>14/09/2023</td></tr>
+        </table>
+      </div>
+
+      <div class="footer">
+        প্রয়োজনে <a href="https://brta.gov.bd" target="_blank">brta.gov.bd</a> বা 
+        <a href="https://bsp.brta.gov.bd" target="_blank">bsp.brta.gov.bd</a> এ যোগাযোগ করুন | 
+        ইমেইল: info@brta.gov.bd
+      </div>
+    </div>
+
+    <!-- English -->
+    <div id="en" class="lang">
+      <h3>Government of the People's Republic of Bangladesh<br>Road Transport And Highways Division<br>Bangladesh Road Transport Authority (BRTA)</h3>
+      <h2>Verification Successful</h2>
+      <p>This Learner Licence is valid</p>
+
+      <div class="profile">
+        <img src="photo.jpg" alt="Applicant Photo">
+      </div>
+
+      <div class="info-section">
+        <h4>Applicant Info</h4>
+        <table>
+          <tr><td>APPLICANT NAME(EN):</td><td>AJHARUL ISLAM</td></tr>
+          <tr><td>APPLICANT NAME(BN):</td><td>আজহারুল ইসলাম</td></tr>
+          <tr><td>FATHER NAME(EN):</td><td>BADUL MIAH</td></tr>
+          <tr><td>FATHER NAME(BN):</td><td>বাদল মিয়া</td></tr>
+          <tr><td>MOTHER NAME(EN):</td><td>ROKEYA BEGUM</td></tr>
+          <tr><td>MOTHER NAME(BN):</td><td>রোকেয়া বেগম</td></tr>
+          <tr><td>DATE OF BIRTH:</td><td>15/01/1997</td></tr>
+          <tr><td>BLOOD GROUP:</td><td>O(+VE)</td></tr>
+          <tr><td>PRESENT ADDRESS:</td><td>JATRAPUR, JATRAPUR, Ashuganj, B.BARIA, CHITTAGONG</td></tr>
+          <tr><td>NID NUMBER:</td><td>24******03</td></tr>
+        </table>
+
+        <h4>Learner Licence Info</h4>
+        <table>
+          <tr><td>LEARNER NO.:</td><td>23-17976045</td></tr>
+          <tr><td>LICENCE NO.:</td><td>DK0897294CL0003</td></tr>
+          <tr><td>LICENCE TYPE:</td><td>PROFESSIONAL</td></tr>
+          <tr><td>VEHICLE CLASS:</td><td>LIGHT</td></tr>
+          <tr><td>EXAM VENUE:</td><td>DHAKA METRO BRTA</td></tr>
+          <tr><td>EXAM DATE:</td><td>20/05/2023</td></tr>
+          <tr><td>LICENSING AUTHORITY:</td><td>DHAKA METRO</td></tr>
+          <tr><td>ROLL NO.:</td><td>197</td></tr>
+          <tr><td>ISSUE DATE:</td><td>15/03/2023</td></tr>
+          <tr><td>EXPIRY DATE:</td><td>14/09/2023</td></tr>
+        </table>
+      </div>
+
+      <div class="footer">
+        For further assistance, please visit <a href="https://brta.gov.bd" target="_blank">brta.gov.bd</a> or 
+        <a href="https://bsp.brta.gov.bd" target="_blank">bsp.brta.gov.bd</a><br>
+        Email: info@brta.gov.bd
+      </div>
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
-    function downloadPDF() {
-      const element = document.getElementById('idCard');
-      const btn = document.getElementById('downloadBtn');
-      btn.style.display = 'none';
-
-      const opt = {
-        margin: [80, 0, 0, 0], // top, right, bottom, left margins (pt)
-        filename: 'id-card.pdf',
-        image: { type: 'jpeg', quality: 1 },
-        html2canvas: { scale: 4 },
-        jsPDF: { unit: 'pt', format: [320, 450], orientation: 'portrait' }
-      };
-
-      html2pdf().set(opt).from(element).save().then(() => {
-        btn.style.display = 'inline-block';
-      });
+    let currentLang = 'en';
+    function toggleLanguage() {
+      if (currentLang === 'en') {
+        document.getElementById('en').style.display = 'none';
+        document.getElementById('bn').style.display = 'block';
+        document.getElementById('langText').innerText = 'বাংলা';
+        document.getElementById('flag').src = 'bd-flag.png';
+        currentLang = 'bn';
+      } else {
+        document.getElementById('bn').style.display = 'none';
+        document.getElementById('en').style.display = 'block';
+        document.getElementById('langText').innerText = 'English';
+        document.getElementById('flag').src = 'us-flag.png';
+        currentLang = 'en';
+      }
     }
   </script>
 </body>
-</html>
+                            </html>
